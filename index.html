@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños Mi Amor - Tu Universo Completo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Quicksand:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ==========================================================================
+           1. ESTILOS GLOBALES Y CONFIGURACIÓN (Midnight & Gold)
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: #020205;
+            color: #c9d1d9;
+            font-family: 'Quicksand', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Canvas interactivo de constelaciones */
+        #starfield {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Contenedor Principal Ultra Premium */
+        .presentation-wrapper {
+            width: 1280px;
+            height: 720px;
+            background: radial-gradient(circle at 50% 50%, #050a14 0%, #010204 100%);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.95), inset 0 0 40px rgba(212, 175, 55, 0.08);
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Barra de Progreso Superior */
+        .star-progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8a6f27, #f3d078, #8a6f27);
+            width: 0%;
+            transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 100;
+        }
+
+        /* ==========================================================================
+           2. SISTEMA DE DIAPOSITIVAS (SLIDES)
+           ========================================================================== */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 50px 80px;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.96) translateY(15px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 5;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1) translateY(0);
+            z-index: 10;
+        }
+
+        /* Cabeceras elegantes */
+        .slide-header {
+            margin-bottom: 25px;
+            border-left: 4px solid #d4af37;
+            padding-left: 20px;
+        }
+
+        .slide-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: #d4af37;
+            letter-spacing: 3px;
+            text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+        }
+
+        .slide-header p {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: rgba(255, 255, 255, 0.45);
+            margin-top: 5px;
+        }
+
+        .slide-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* Layouts de Contenido */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            width: 100%;
+        }
+
+        /* ==========================================================================
+           3. COMPONENTES INTERACTIVOS AVANZADOS
+           ========================================================================== */
+
+        /* A) EL SOBRE DE CARTA AMPLIADO */
+        .envelope-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 440px;
+            perspective: 1200px;
+        }
+
+        .envelope {
+            width: 720px;
+            height: 400px;
+            background: #0d1522;
+            border: 2px solid #d4af37;
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-style: preserve-3d;
+        }
+
+        .envelope.open {
+            transform: rotateX(12deg) translateY(45px);
+        }
+
+        .envelope-front {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+        }
+
+        .envelope-front i {
+            font-size: 70px;
+            color: #d4af37;
+            margin-bottom: 25px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Contenedor de la carta extensa */
+        .letter-content {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            background: #050a12;
+            border: 1px dashed rgba(212, 175, 55, 0.5);
+            border-radius: 12px;
+            padding: 35px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateZ(-30px) translateY(0);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            overflow-y: auto;
+        }
+
+        .envelope.open .letter-content {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateZ(60px) translateY(-60px);
+            height: 460px;
+            box-shadow: 0 -15px 40px rgba(0,0,0,0.9);
+        }
+
+        .letter-text-long {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #e2e8f0;
+            text-align: justify;
+        }
+
+        .letter-text-long h3 {
+            font-family: 'Cinzel', serif;
+            color: #d4af37;
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+
+        .letter-section-break {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            margin: 20px 0;
+        }
+
+        /* B) ÁLBUM POLAROID FLOTANTE (Slide Memorias) */
+        .polaroid-deck {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+            perspective: 1000px;
+        }
+
+        .polaroid-card {
+            width: 280px;
+            height: 350px;
+            background: #fff;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            border-radius: 4px;
+            transform: rotate(var(--rotation));
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .polaroid-card:hover {
+            transform: scale(1.1) rotate(0deg) translateY(-20px);
+            z-index: 20;
+            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.25);
+        }
+
+        .polaroid-photo {
+            width: 100%;
+            height: 250px;
+            background: #111;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            position: relative;
+        }
+
+        .polaroid-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .polaroid-caption {
+            font-family: 'Cinzel', serif;
+            color: #222;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 15px;
+            letter-spacing: 1px;
+        }
+
+        /* C) TARROS DE DESEOS DEL MAÑANA */
+        .jar-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .wish-jar {
+            width: 250px;
+            height: 340px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 2px solid rgba(212, 175, 55, 0.25);
+            border-radius: 30px 30px 15px 15px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .wish-jar::before {
+            content: '';
+            width: 80px;
+            height: 20px;
+            background: #8a6f27;
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.3);
+        }
+
+        .wish-jar:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: #d4af37;
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .wish-jar i {
+            font-size: 45px;
+            color: #d4af37;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .wish-jar:hover i {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .wish-jar h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .wish-jar p {
+            font-size: 13px;
+            color: #a4b1cd;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .wish-jar.unlocked p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .wish-jar.unlocked .tap-hint {
+            display: none;
+        }
+
+        .tap-hint {
+            font-size: 12px;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+
+        /* D) EL DICCIONARIO DE NUESTRA LOCURA */
+        .dictionary-box {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            background: rgba(10, 18, 32, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            height: 380px;
+            overflow: hidden;
+        }
+
+        .dictionary-tabs {
+            background: rgba(5, 10, 18, 0.8);
+            border-right: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .dict-tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.05);
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .dict-tab:hover, .dict-tab.active {
+            background: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            padding-left: 30px;
+        }
+
+        .dictionary-view {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .dictionary-view h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            color: #d4af37;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .dictionary-view .pronunciation {
+            font-style: italic;
+            color: #888;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .dictionary-view .definition {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #e2e8f0;
+        }
+
+        /* E) CONSTELACIÓN DE 29 ESTRELLAS */
+        .constellation-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.01);
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.05);
+        }
+
+        .star-point {
+            width: 45px;
+            height: 45px;
+            background: radial-gradient(circle, #fff 0%, rgba(212, 175, 55, 0.2) 70%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: #020205;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .star-point:hover, .star-point.active {
+            transform: scale(1.2);
+            background: #d4af37;
+            color: #000;
+            box-shadow: 0 0 25px #d4af37;
+        }
+
+        .reason-display-panel {
+            background: rgba(10, 18, 32, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            min-height: 110px;
+            margin-top: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .reason-display-panel::before {
+            content: '✦';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #020408;
+            color: #d4af37;
+            padding: 0 10px;
+            font-size: 18px;
+        }
+
+        /* F) CARD ROW (Alquimia / Leyes) */
+        .card-row {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .gold-card {
+            background: rgba(10, 18, 32, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            flex: 1;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .gold-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%);
+        }
+
+        .gold-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .gold-card i.icon-decor {
+            font-size: 36px;
+            color: #d4af37;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .gold-card h3 {
+            font-family: 'Cinzel', serif;
+            color: #fff;
+            margin-bottom: 12px;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        .gold-card p {
+            font-size: 14px;
+            color: #a4b1cd;
+            line-height: 1.6;
+        }
+
+        /* PLAYLIST COMPONENT */
+        .playlist-card {
+            background: #0d131f;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .playlist-cover {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #111, #d4af37);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px;
+            color: #0d131f;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .playlist-cover::after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            background: #0d131f;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .track-info {
+            flex-grow: 1;
+        }
+
+        .track-info h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .track-info p {
+            color: #d4af37;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            background: #d4af37;
+            color: #020205;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        .timeline-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-progress {
+            width: 45%;
+            height: 100%;
+            background: #d4af37;
+            border-radius: 3px;
+        }
+
+        /* ==========================================================================
+           4. CONTROLES DE NAVEGACIÓN Y PROGRESO
+           ========================================================================== */
+        .controls-layer {
+            position: absolute;
+            bottom: 30px;
+            left: 80px;
+            right: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: rgba(10, 18, 32, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #d4af37;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #d4af37;
+            color: #020205;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+            border-color: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.3);
+        }
+
+        .slide-counter {
+            font-family: 'Cinzel', serif;
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        /* ==========================================================================
+           5. MODAL DE CELEBRACIÓN PERSONALIZADO (Evita alerts)
+           ========================================================================== */
+        .modal-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .celebration-modal {
+            background: #060c14;
+            border: 2px solid #d4af37;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 550px;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+            transform: scale(0.8);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .modal-overlay.active .celebration-modal {
+            transform: scale(1);
+        }
+
+        .celebration-modal h3 {
+            font-family: 'Cinzel', serif;
+            color: #d4af37;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .celebration-modal p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #e2e8f0;
+            margin-bottom: 30px;
+        }
+
+        .close-modal-btn {
+            background: #d4af37;
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal-btn:hover {
+            box-shadow: 0 0 15px #d4af37;
+            transform: scale(1.05);
+        }
+
+        /* Confeti en CSS */
+        .confetti-piece {
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background: #d4af37;
+            opacity: 0.8;
+            border-radius: 2px;
+        }
+
+        /* ==========================================================================
+           6. ANIMACIONES Y CITAS
+           ========================================================================== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .love-quote {
+            font-family: 'Cinzel', serif;
+            font-size: 26px;
+            line-height: 1.5;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            padding: 40px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .love-quote::before, .love-quote::after {
+            content: '“';
+            font-size: 80px;
+            color: rgba(212, 175, 55, 0.2);
+            position: absolute;
+        }
+        .love-quote::before { top: -20px; left: 10px; }
+        .love-quote::after { bottom: -60px; right: 10px; }
+
+    </style>
+</head>
+<body>
+
+<audio id="musica" autoplay loop playsinline>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+       <!-- Lienzo interactivo para el fondo de estrellas y galaxias -->
+    <canvas id="starfield"></canvas>
+
+    <!-- Contenedor Principal de la Presentación -->
+    <div class="presentation-wrapper">
+        <div class="star-progress-bar" id="progressBar"></div>
+
+        <!-- ==========================================
+             SLIDE 1: PORTADA CELESTIAL
+             ========================================== -->
+        <div class="slide active" id="slide-1">
+            <div style="text-align: center; width: 100%;">
+                <p style="color: #d4af37; letter-spacing: 6px; font-size: 14px; text-transform: uppercase; margin-bottom: 15px;">Un Cumpleaños Escrito en las Constelaciones</p>
+                <h1 style="font-family: 'Cinzel', serif; font-size: 85px; line-height: 1.1; color: #fff; font-weight: 900; letter-spacing: 4px; margin-bottom: 20px;">
+                    El Universo de <br><span style="color: #d4af37; text-shadow: 0 0 20px rgba(212,175,55,0.4);">Tus Ojos</span>
+                </h1>
+                <div style="width: 150px; height: 1px; background: linear-gradient(90deg, transparent, #d4af37, transparent); margin: 30px auto;"></div>
+                <p style="font-size: 20px; max-width: 800px; margin: 0 auto; line-height: 1.6; font-weight: 300; color: #a4b1cd;">
+                    Para mi compañera de locuras en su cumpleaños. Una bitácora de amor interminable dedicada a la persona más maravillosa que el cosmos puso en mi camino este <span style="color: #d4af37; font-weight: bold;">29 de mayo</span>.
+                </p>
+                <p style="margin-top: 40px; font-size: 13px; letter-spacing: 3px; color: rgba(212,175,55,0.7); text-transform: uppercase;">
+                    Presiona "Siguiente" o usa las flechas del teclado • De Bray
+                </p>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 2: LA CARTA MAGNA (EXTENSÍSIMA E INTERACTIVA)
+             ========================================== -->
+        <div class="slide" id="slide-2">
+            <div class="slide-header">
+                <h2>Una Confesión del Alma</h2>
+                <p>Haz clic en el sobre dorado para desplegar tu carta de cumpleaños</p>
+            </div>
+            <div class="slide-body">
+                <div class="envelope-container">
+                    <div class="envelope" id="loveEnvelope" onclick="toggleEnvelope()">
+                        <div class="envelope-front">
+                            <i class="fa-solid fa-envelope-open-text"></i>
+                            <h3 style="color: #d4af37; font-family: 'Cinzel', serif; font-size: 22px;">Especialmente para ti</h3>
+                            <p style="color: #a4b1cd; font-size: 15px; margin-top: 10px;">En este 29 de mayo... Abre tu regalo escrito</p>
+                        </div>
+                        <div class="letter-content" onclick="event.stopPropagation();">
+                            <div class="letter-text-long">
+                                <h3>Feliz Cumpleaños, Mi Reina Hermosa</h3>
+                                <p><strong>Mi amor, mi compañera de vida, mi loca favorita:</strong></p>
+                                <p>Hoy se celebra un año más de tu llegada al mundo, de esa hermosa coincidencia cósmica que te trajo hasta mí. Quiero usar esta carta para recordarte lo infinitamente afortunado que me siento por tenerte. Eres esa luz constante que disipa cualquier sombra en mi día, esa risa contagiosa que alegra mi alma y ese refugio donde siempre encuentro paz.</p>
+                                <p>A veces me detengo a pensar en cómo hemos construido nuestro propio universo. Con cada broma, cada mirada cómplice, cada "click" que nos une y cada momento en el que simplemente somos nosotros, sin máscaras. Me enamora tu autenticidad, tu valentía y esa maravillosa locura que te caracteriza y que complementa la mía de forma perfecta.</p>
+                                
+                                <div class="letter-section-break"></div>
+                                
+                                <p><strong>Nuestra complicidad en cada paso:</strong></p>
+                                <p>Mirar atrás y contemplar el camino que hemos recorrido juntos me llena de un orgullo indescriptible. No ha sido un camino lineal, ha sido una aventura emocionante llena de aprendizaje, risas que nos dejan sin aire y una madurez que hemos cultivado de la mano. Contigo aprendí que el amor real no se trata de perfección, sino de la paciencia con la que nos entendemos, la lealtad inquebrantable en los días difíciles y las ganas infinitas de hacernos sonreír mutuamente.</p>
+                                <p>Admiro profundamente la mujer en la que te has convertido. Tu nobleza, tu fuerza silenciosa pero imparable para perseguir lo que anhelas, y esa sensibilidad única que te permite conectar con los demás de una forma tan pura. Eres un faro de luz no solo para mí, sino para todos los que tienen la dicha de conocerte.</p>
+                                
+                                <div class="letter-section-break"></div>
+                                
+                                <p><strong>Mis promesas para tu nuevo año de vida:</strong></p>
+                                <p>En este nuevo año de vida que comienzas hoy, 29 de mayo, prometo seguir cuidándote con la misma intensidad. Prometo ser tu puerto seguro cuando el mundo se sienta pesado, tu cómplice en las locuras más inesperadas y tu mayor fanático en cada meta que decidas alcanzar. No quiero que camines detrás de mí ni delante, quiero que sigamos caminando exactamente al mismo paso, construyendo el futuro brillante que tanto nos merecemos.</p>
+                                <p>Que el universo te devuelva multiplicado todo el amor, la alegría y la luz que le entregas a este mundo con tu sola existencia. Disfruta de esta pequeña sorpresa estelar que preparé con cada latido de mi corazón.</p>
+                                <p style="text-align: right; font-weight: bold; color: #d4af37; margin-top: 25px; font-size: 16px;">— Por siempre y para siempre tuyo, Bray ❤️</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 3: EL MAPA DE TU CIELO (GÉMINIS ROMÁNTICO)
+             ========================================== -->
+        <div class="slide" id="slide-3">
+            <div class="slide-header">
+                <h2>El Firmamento de tu Nacimiento</h2>
+                <p>Tu Signo: El Brillo de Géminis (29 de Mayo)</p>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="zodiac-wheel-container">
+                        <svg class="zodiac-wheel-svg" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="#d4af37" stroke-width="0.5" stroke-dasharray="2 2" />
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#d4af37" stroke-width="1" />
+                            <path d="M30,30 L45,40 L55,35 L70,45 M45,40 L50,60 L65,65" fill="none" stroke="#fff" stroke-width="0.8" />
+                            <circle cx="30" cy="30" r="1.5" fill="#d4af37" />
+                            <circle cx="45" cy="40" r="1.5" fill="#fff" />
+                            <circle cx="55" cy="35" r="2" fill="#d4af37" />
+                            <circle cx="70" cy="45" r="1.5" fill="#fff" />
+                            <circle cx="50" cy="60" r="1.5" fill="#fff" />
+                            <circle cx="65" cy="65" r="2" fill="#d4af37" />
+                        </svg>
+                        <div style="position: absolute; color: #d4af37; font-family: 'Cinzel', serif; font-size: 28px; font-weight: bold;">♊</div>
+                    </div>
+                    <div>
+                        <h3 style="font-family: 'Cinzel', serif; font-size: 24px; color: #fff; margin-bottom: 15px;">La Dualidad que me Enamora</h3>
+                        <p style="font-size: 15px; line-height: 1.7; color: #a4b1cd; margin-bottom: 15px;">
+                            Nacer un <strong style="color: #d4af37;">29 de mayo</strong> te otorga la vibración de una de las constelaciones más dinámicas del cielo. Eres aire, movimiento constante, chispa mental e ingenio absoluto.
+                        </p>
+                        <p style="font-size: 15px; line-height: 1.7; color: #a4b1cd;">
+                            Para mí, tu dualidad no es contradicción, sino una sinfonía perfecta. Eres la mujer madura, centrada y de metas claras que me inspira respeto y admiración profunda; pero al mismo tiempo eres esa niña "loca", risueña, juguetona y libre con la que puedo reír sin parar durante horas. Eres todo mi universo en un solo ser.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 4: LAS 29 CONSTELACIONES DE TU ALMA
+             ========================================== -->
+        <div class="slide" id="slide-4">
+            <div class="slide-header">
+                <h2>29 Constelaciones de tu Alma</h2>
+                <p>Haz clic en cada estrella para revelar una razón de por qué te amo</p>
+            </div>
+            <div class="slide-body">
+                <div class="constellation-grid" id="starsContainer">
+                    <!-- Javascript rellenará esto con exactamente 29 estrellas -->
+                </div>
+                <div class="reason-display-panel">
+                    <p id="reasonText" style="font-size: 18px; color: #fff; font-style: italic;">Selecciona una estrella en el mapa del cielo para leer mi corazón...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 5: EL DICCIONARIO DE NUESTRA LOCURA
+             ========================================== -->
+        <div class="slide" id="slide-5">
+            <div class="slide-header">
+                <h2>El Glosario de Nuestro Amor</h2>
+                <p>Esos términos y códigos que solo cobran sentido entre tú y yo</p>
+            </div>
+            <div class="slide-body">
+                <div class="dictionary-box">
+                    <div class="dictionary-tabs" id="dictTabs">
+                        <!-- Pestañas cargadas por Javascript -->
+                    </div>
+                    <div class="dictionary-view" id="dictView">
+                        <!-- Vista cargada por Javascript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 6: LA ALQUIMIA DE NUESTRO DESTINO
+             ========================================== -->
+        <div class="slide" id="slide-6">
+            <div class="slide-header">
+                <h2>La Alquimia de Nuestro Destino</h2>
+                <p>Cómo se transformó mi mundo desde que te encontré</p>
+            </div>
+            <div class="slide-body">
+                <div class="card-row">
+                    <div class="gold-card">
+                        <i class="fa-solid fa-hourglass-start icon-decor"></i>
+                        <h3>Antes de Ti</h3>
+                        <p>Los días transcurrían bajo una rutina estructurada y colores tenues. El cielo de mayo era simplemente una fecha más en el calendario y el amor era un concepto abstracto que leía en los libros, un camino sin un destino claro.</p>
+                    </div>
+                    <div class="gold-card" style="border-color: rgba(212,175,55,0.4); background: rgba(212,175,55,0.03);">
+                        <i class="fa-solid fa-bolt icon-decor" style="color: #e5c158;"></i>
+                        <h3>El Choque Estelar</h3>
+                        <p>Entonces llegaste tú, con tu hermosa locura y tu risa ruidosa. Fue un terremoto dulce que reordenó mis prioridades. Tu mirada hizo un "click" instantáneo con la mía, encendiendo un fuego que desde entonces no ha hecho más que crecer.</p>
+                    </div>
+                    <div class="gold-card">
+                        <i class="fa-solid fa-infinity icon-decor"></i>
+                        <h3>Nuestro Porvenir</h3>
+                        <p>Hoy, el futuro no es un misterio que temer, sino una obra maestra que quiero pintar contigo. Cada 29 de mayo es un recordatorio de que mi mayor logro ha sido ganarme un lugar privilegiado en tu hermoso corazón.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 7: ÁLBUM DE MEMORIAS FLOTANTES (INTERACTIVO)
+             ========================================== -->
+        <div class="slide" id="slide-7">
+            <div class="slide-header">
+                <h2>Galería de un Amor Infinito</h2>
+                <p>Pasa el cursor sobre las fotos para descubrir su mensaje oculto</p>
+            </div>
+            <div class="slide-body">
+                <div class="polaroid-deck">
+                    <!-- Polaroid 1 -->
+                    <div class="polaroid-card" style="--rotation: -4deg;" onclick="flipPolaroid(this)">
+                        <div class="polaroid-photo">
+                            <img src="foto1.jpg" alt="Foto de camuflado">
+                        </div>
+                        <div class="polaroid-caption">Nuestra Unión</div>
+                    </div>
+                    <!-- Polaroid 2 -->
+                    <div class="polaroid-card" style="--rotation: 2deg;" onclick="flipPolaroid(this)">
+                        <div class="polaroid-photo">
+                            <img src="foto2.jpg" alt="Caminando en dia soleado">
+                        </div>
+                        <div class="polaroid-caption">Nuestro Lugar Seguro</div>
+                    </div>
+                    <!-- Polaroid 3 -->
+                    <div class="polaroid-card" style="--rotation: -2deg;" onclick="flipPolaroid(this)">
+                        <div class="polaroid-photo">
+                            <img src="foto3.jpg" alt="Agarrados de la manito">
+                        </div>
+                        <div class="polaroid-caption">Nuestros Sueños</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 8: TARROS DE DESEOS DEL MAÑANA (INTERACTIVO)
+             ========================================== -->
+        <div class="slide" id="slide-8">
+            <div class="slide-header">
+                <h2>Deseos Guardados en Estrellas</h2>
+                <p>Haz clic en cada botella para liberar un deseo eterno que tengo para ti</p>
+            </div>
+            <div class="slide-body">
+                <div class="jar-container">
+                    <div class="wish-jar" onclick="unlockWish(this)">
+                        <i class="fa-solid fa-wand-sparkles"></i>
+                        <h3>Deseo de Paz</h3>
+                        <p>Que tu mente encuentre calma en los días ruidosos y que nunca olvides lo valiosa que eres. Yo seré tu escudo.</p>
+                        <div class="tap-hint">Tocar para abrir</div>
+                    </div>
+                    <div class="wish-jar" onclick="unlockWish(this)">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                        <h3>Deseo de Risa</h3>
+                        <p>Que nunca te falten esos momentos donde ríes a carcajadas hasta que te duele el estómago. Esa es mi melodía favorita.</p>
+                        <div class="tap-hint">Tocar para abrir</div>
+                    </div>
+                    <div class="wish-jar" onclick="unlockWish(this)">
+                        <i class="fa-solid fa-rocket"></i>
+                        <h3>Deseo de Vuelo</h3>
+                        <p>Que conquistes cada meta y sueño que te propongas. Yo estaré abajo sosteniendo la red, siempre orgulloso de ti.</p>
+                        <div class="tap-hint">Tocar para abrir</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 9: LA PLAYLIST DE NUESTRO AMOR
+             ========================================== -->
+        <div class="slide" id="slide-9">
+            <div class="slide-header">
+                <h2>La Banda Sonora del Alma</h2>
+                <p>Las canciones que se escribieron pensando en nosotros</p>
+            </div>
+            <div class="slide-body">
+                <div class="playlist-card">
+                    <div class="playlist-cover">
+                        <i class="fa-solid fa-record-vinyl"></i>
+                    </div>
+                    <div class="track-info">
+                        <h3>Nuestra Sintonía Perfecta</h3>
+                        <p>Álbum: El Universo en tus Ojos (De Bray para su Reina)</p>
+                        <div class="audio-controls">
+                            <div class="play-btn" onclick="togglePlay()"><i class="fa-solid fa-play" id="playIcon"></i></div>
+                            <div class="timeline-bar">
+                                <div class="timeline-progress" id="musicProgress"></div>
+                            </div>
+                            <span style="font-size: 13px; color: #888;">01:29 / 05:29</span>
+                        </div>
+                        <p style="font-style: italic; font-size: 14px; color: #a4b1cd; margin: 0;">
+                            "Y es que no hay mejor melodía que el sonido de tu risa cuando estamos a punto de cometer una locura juntos."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 10: EL MEJOR EQUIPO (GRÁFICO DE VIDA)
+             ========================================== -->
+        <div class="slide" id="slide-10">
+            <div class="slide-header">
+                <h2>Nuestra Fuerza de Atracción</h2>
+                <p>La curva que demuestra que estamos destinados al infinito</p>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2" style="align-items: center;">
+                    <div>
+                        <svg viewBox="0 0 400 200" style="width: 100%; filter: drop-shadow(0 0 8px rgba(212,175,55,0.3));">
+                            <path d="M10,180 Q100,170 200,90 T390,10" fill="none" stroke="#d4af37" stroke-width="4" />
+                            <circle cx="10" cy="180" r="6" fill="#fff" />
+                            <circle cx="200" cy="90" r="6" fill="#d4af37" />
+                            <circle cx="390" cy="10" r="8" fill="#fff" />
+                            <text x="20" y="195" fill="#888" font-size="12">El inicio</text>
+                            <text x="180" y="120" fill="#d4af37" font-size="12">Hoy (Día 29)</text>
+                            <text x="310" y="30" fill="#fff" font-size="12">Para siempre</text>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 style="font-family: 'Cinzel', serif; font-size: 24px; color: #fff; margin-bottom: 15px;">Una Tendencia Imparable</h3>
+                        <p style="font-size: 15px; line-height: 1.7; color: #a4b1cd; margin-bottom: 10px;">
+                            Si el amor pudiera medirse en un gráfico científico, la trayectoria de lo nuestro rompería cualquier escala conocida. Comenzó como una chispa suave, un simple coqueteo lleno de risas nerviosas...
+                        </p>
+                        <p style="font-size: 15px; line-height: 1.7; color: #a4b1cd;">
+                            Hoy en día, se ha convertido en una aceleración constante. Mi admiración por tu fuerza, mi deseo de verte triunfar y la profundidad de mis sentimientos por ti crecen de manera exponencial cada segundo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 11: LAS LEYES DE MI CORAZÓN
+             ========================================== -->
+        <div class="slide" id="slide-11">
+            <div class="slide-header">
+                <h2>Las Leyes de mi Corazón</h2>
+                <p>Reglas cósmicas que rigen mi amor por ti</p>
+            </div>
+            <div class="slide-body">
+                <div class="card-row">
+                    <div class="gold-card">
+                        <h3 style="color: #d4af37;">1. Ley de Gravedad</h3>
+                        <p>No importa qué tan lejos nos encontremos o qué tan caótico sea el día, mis pensamientos siempre terminan siendo atraídos con una fuerza ineludible hacia ti. Eres mi centro de masa emocional.</p>
+                    </div>
+                    <div class="gold-card">
+                        <h3 style="color: #d4af37;">2. Ley de la Relatividad</h3>
+                        <p>El tiempo a tu lado adquiere dimensiones mágicas. Cinco minutos sin ti se sienten como horas eternas de desierto, mientras que cinco horas a tu lado se desvanecen en un suspiro de felicidad.</p>
+                    </div>
+                    <div class="gold-card">
+                        <h3 style="color: #d4af37;">3. Ley de Conservación</h3>
+                        <p>Mi amor por ti no se destruye ni se debilita; solo se transforma y se expande en nuevas formas de cuidarte, de adorarte y de hacerte sonreír cada día.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 12: EL BRINDIS POR TUS 29
+             ========================================== -->
+        <div class="slide" id="slide-12">
+            <div class="slide-header">
+                <h2>Un Brindis Sagrado por Ti</h2>
+                <p>Alcemos la copa por tu luz, tu madurez y tus sueños</p>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div>
+                        <h3 style="font-family: 'Cinzel', serif; font-size: 24px; color: #d4af37; margin-bottom: 20px;">Por Todo lo Vivido y lo que Vendrá</h3>
+                        <p style="font-size: 15px; line-height: 1.8; color: #a4b1cd; margin-bottom: 15px;">
+                            Quiero brindar por ti, mi amor. Brindo por tus batallas silenciosas, esas que luchas y ganas con una entereza admirable. Brindo por tu capacidad infinita de dar amor desinteresado y por la nobleza de tu alma, que embellece la vida de todo aquel que tiene la fortuna de estar a tu alrededor.
+                        </p>
+                        <p style="font-size: 15px; line-height: 1.8; color: #a4b1cd;">
+                            Salud por este día de cumpleaños, por tu risa ruidosa, por tu hermosa locura y por cada arruga de felicidad que dibujemos juntos en el futuro. ¡Salud por tu vida, mi reina!
+                        </p>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <i class="fa-solid fa-champagne-glasses" style="font-size: 160px; color: #d4af37; filter: drop-shadow(0 0 15px rgba(212,175,55,0.4)); animation: float 4s ease-in-out infinite;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 13: ESTADÍSTICAS CELESTIALES
+             ========================================== -->
+        <div class="slide" id="slide-13">
+            <div class="slide-header">
+                <h2>Estadísticas de mi Universo</h2>
+                <p>Nuestra historia medida con ojos matemáticos</p>
+            </div>
+            <div class="slide-body">
+                <div class="grid-3">
+                    <div class="gold-card" style="text-align: center;">
+                        <h3 style="font-size: 45px; color: #d4af37; font-family: 'Cinzel', serif; margin-bottom: 10px;">100%</h3>
+                        <p style="font-weight: bold; margin-bottom: 10px; color: #fff;">Sintonía Mutua</p>
+                        <p style="font-size: 12px; color: #a4b1cd;">De compatibilidad absoluta cuando decidimos cometer una locura.</p>
+                    </div>
+                    <div class="gold-card" style="text-align: center;">
+                        <h3 style="font-size: 45px; color: #d4af37; font-family: 'Cinzel', serif; margin-bottom: 10px;">24/7</h3>
+                        <p style="font-weight: bold; margin-bottom: 10px; color: #fff;">Pensamientos</p>
+                        <p style="font-size: 12px; color: #a4b1cd;">Frecuencia con la que tu hermosa sonrisa se cruza por mi cabeza.</p>
+                    </div>
+                    <div class="gold-card" style="text-align: center;">
+                        <h3 style="font-size: 45px; color: #d4af37; font-family: 'Cinzel', serif; margin-bottom: 10px;">∞</h3>
+                        <p style="font-weight: bold; margin-bottom: 10px; color: #fff;">Amor Eterno</p>
+                        <p style="font-size: 12px; color: #a4b1cd;">La proyección exacta del tiempo que deseo pasar a tu lado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 14: UNA DECLARACIÓN PROFUNDA
+             ========================================== -->
+        <div class="slide" id="slide-14">
+            <div class="slide-body">
+                <div class="love-quote">
+                    "Si tuviera la oportunidad de elegir mi destino en un millón de vidas diferentes, te buscaría en cada una de ellas para volver a perderme en la hermosa locura de tu mirada."
+                </div>
+                <p style="text-align: center; font-family: 'Cinzel', serif; color: #d4af37; font-size: 18px; margin-top: 35px; letter-spacing: 2px;">
+                    — Bray, redactando verdades universales
+                </p>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 15: EL GRAN SÍ (CIERRE)
+             ========================================== -->
+        <div class="slide" id="slide-15">
+            <div style="text-align: center; width: 100%;">
+                <h2 style="font-family: 'Cinzel', serif; font-size: 65px; color: #d4af37; margin-bottom: 20px;">¡Feliz Cumpleaños, Mi Amor!</h2>
+                <p style="font-size: 24px; color: #fff; margin-bottom: 30px;">Que este nuevo año esté lleno de risas, de nosotros y de infinitas alegrías.</p>
+                <div style="width: 100px; height: 1px; background: #d4af37; margin: 20px auto;"></div>
+                <p style="font-size: 16px; color: #888; letter-spacing: 2px; text-transform: uppercase;">Gracias por ser la dueña de mi corazón.</p>
+                <p style="font-size: 45px; font-family: 'Cinzel', serif; font-weight: bold; color: #fff; margin-top: 40px;">
+                    ¿Me dejas seguir amándote por siempre?
+                </p>
+                <div style="display: flex; gap: 30px; justify-content: center; margin-top: 40px;">
+                    <div class="nav-btn" style="background: #d4af37; color: #000; font-weight: bold;" onclick="triggerCelebrationModal()">SÍ, MIL VECES SÍ</div>
+                    <div class="nav-btn" style="border-color: #d4af37; color: #d4af37;" onclick="triggerCelebrationModal()">¡SÍ, CLARO QUE SÍ!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CAPA DE CONTROLES -->
+        <div class="controls-layer">
+            <button class="nav-btn" id="prevBtn" onclick="prevSlide()" disabled>
+                <i class="fa-solid fa-arrow-left"></i> Anterior
+            </button>
+            <div class="slide-counter" id="slideCounter">1 / 15</div>
+            <button class="nav-btn" id="nextBtn" onclick="nextSlide()">
+                Siguiente <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE CELEBRACIÓN -->
+    <div class="modal-overlay" id="celebrationOverlay">
+        <div class="celebration-modal">
+            <i class="fa-solid fa-cake-candles" style="font-size: 50px; color: #d4af37; margin-bottom: 20px; display: block;"></i>
+            <h3>¡Eres Mi Mayor Regalo!</h3>
+            <p>
+                Sabía perfectamente cuál sería tu respuesta. Prometo dar lo mejor de mí para que cada día de este nuevo año de vida a mi lado sea maravilloso, divertido y lleno de amor. ¡Feliz cumpleaños, mi reina hermosa! Te amo con el alma.
+            </p>
+            <p style="font-family: 'Cinzel', serif; color: #d4af37; font-weight: bold;">— Con todo mi amor, Bray</p>
+            <button class="close-modal-btn" onclick="closeCelebrationModal()">Cerrar con Amor</button>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         7. LÓGICA DE JAVASCRIPT
+         ========================================== -->
+    <script>
+        // CONFIGURACIÓN DE DIAPOSITIVAS
+        let currentSlide = 1;
+        const totalSlides = 15;
+
+        function updateSlide() {
+            document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
+            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+
+            document.getElementById('slideCounter').innerText = `${currentSlide} / ${totalSlides}`;
+
+            const progressPercent = ((currentSlide - 1) / (totalSlides - 1)) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // CARTA INTERACTIVA
+        function toggleEnvelope() {
+            const env = document.getElementById('loveEnvelope');
+            env.classList.toggle('open');
+        }
+
+        // MOSTRAR TARROS DE DESEOS
+        function unlockWish(element) {
+            element.classList.add('unlocked');
+            triggerGoldBurst(element.offsetLeft + element.offsetWidth/2, element.offsetTop + element.offsetHeight/2);
+        }
+
+        // PLAYLIST MUSIC PLAYBACK
+        let isPlaying = false;
+        function togglePlay() {
+            const playIcon = document.getElementById('playIcon');
+            const progress = document.getElementById('musicProgress');
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+                playIcon.className = "fa-solid fa-pause";
+                progress.style.transition = "width 240s linear";
+                progress.style.width = "100%";
+            } else {
+                playIcon.className = "fa-solid fa-play";
+                const currentWidth = progress.offsetWidth;
+                const parentWidth = progress.parentElement.offsetWidth;
+                progress.style.transition = "none";
+                progress.style.width = `${(currentWidth / parentWidth) * 100}%`;
+            }
+        }
+
+        // MANEJO DE MODAL PERSONALIZADO (Evita alerts molestos)
+        const overlay = document.getElementById('celebrationOverlay');
+        function triggerCelebrationModal() {
+            overlay.classList.add('active');
+            createConfetti();
+        }
+
+        function closeCelebrationModal() {
+            overlay.classList.remove('active');
+            // Limpiar confeti
+            const pieces = document.querySelectorAll('.confetti-piece');
+            pieces.forEach(p => p.remove());
+        }
+
+        function createConfetti() {
+            const colors = ['#d4af37', '#f3d078', '#fff', '#8a6f27', '#aa8420'];
+            for (let i = 0; i < 60; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-piece';
+                confetti.style.left = `${Math.random() * 100}%`;
+                confetti.style.top = `${Math.random() * 100}%`;
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.transform = `rotate(${Math.random() * 360}deg) scale(${0.5 + Math.random()})`;
+                overlay.appendChild(confetti);
+            }
+        }
+
+        // ==========================================
+        // DICCIONARIO DE NUESTRA LOCURA
+        // ==========================================
+        const dictionaryData = [
+            {
+                term: "Click",
+                pronunciation: "[clík] • sustantivo de nuestra química",
+                def: "Dícese de esa increíble conexión mental e instantánea que ocurre cuando nuestras miradas se encuentran, permitiéndonos entablar diálogos enteros de complicidad sin pronunciar una sola palabra."
+            },
+            {
+                term: "Mi Loca",
+                pronunciation: "[mí ló-ca] • apodo cariñoso",
+                def: "La forma más pura y sincera de llamar a la reina de mi corazón. Refiere a tu autenticidad, a tu capacidad única de reírte de ti misma y de contagiarme esa frescura de ver la vida con ojos felices."
+            },
+            {
+                term: "Bray",
+                pronunciation: "[bráy] • sustantivo propio",
+                def: "Tu mayor admirador, tu escudo protector y tu fiel compañero de aventuras. El dueño de un corazón que late exclusivamente al ritmo de tu risa y que promete cuidarte en cada paso del camino."
+            },
+            {
+                term: "Hogar",
+                pronunciation: "[o-gár] • sustantivo estelar",
+                def: "No es una casa ni una coordenada física en el mapa. Refiere directamente al espacio cálido y reconfortante que se forma justo en el momento en que me estrechas entre tus brazos."
+            }
+        ];
+
+        const dictTabs = document.getElementById('dictTabs');
+        const dictView = document.getElementById('dictView');
+
+        function loadDictionary() {
+            dictTabs.innerHTML = "";
+            dictionaryData.forEach((item, index) => {
+                const tab = document.createElement('div');
+                tab.className = `dict-tab ${index === 0 ? 'active' : ''}`;
+                tab.innerText = item.term;
+                tab.onclick = () => {
+                    document.querySelectorAll('.dict-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    showDefinition(index);
+                };
+                dictTabs.appendChild(tab);
+            });
+            showDefinition(0);
+        }
+
+        function showDefinition(index) {
+            const data = dictionaryData[index];
+            dictView.innerHTML = `
+                <h3>${data.term}</h3>
+                <div class="pronunciation">${data.pronunciation}</div>
+                <div class="definition">${data.def}</div>
+            `;
+        }
+
+        loadDictionary();
+
+        // ==========================================
+        // 29 RAZONES DE MI CORAZÓN (ESTRELLAS)
+        // ==========================================
+        const reasons = [
+            "Tu capacidad de hacerme sonreír incluso cuando he tenido el día más pesado.",
+            "La forma tan tierna y única en la que pronuncias mi nombre cuando quieres un abrazo.",
+            "Esa hermosa 'locura' que tienes, que no le teme al ridículo y llena mi vida de diversión.",
+            "Tu mirada de complicidad cuando estamos rodeados de gente y solo nosotros entendemos el chiste.",
+            "La fuerza y resiliencia con la que afrontas cada obstáculo; me inspiras a ser mejor.",
+            "Tu lealtad inquebrantable; sé que contigo tengo un equipo para toda la vida.",
+            "Cómo se arruga tu nariz cuando te ríes a carcajadas de mis chistes malos.",
+            "El olor de tu cabello cuando te abrazo fuerte por la mañana.",
+            "Tu inteligencia deslumbrante, capaz de conversar de todo y enseñarme algo nuevo siempre.",
+            "La forma en que defiendes tus ideas con esa pasión que me vuelve loco.",
+            "Tus besos inesperados que me salvan de cualquier mal día.",
+            "El soporte emocional que me das; contigo puedo mostrarme vulnerable sin temor.",
+            "La magia que tienes para transformar una simple tarde de películas en el mejor plan del año.",
+            "Tu generosidad y el gran corazón que tienes con todas las personas que amas.",
+            "Esos pequeños celos tiernos que me recuerdan lo mucho que te importo.",
+            "Cómo me escuchas con absoluta atención cuando te cuento mis metas más locas.",
+            "La paz infinita que siento cuando me quedo dormido a tu lado.",
+            "Tus abrazos por la espalda que me recargan la energía por completo.",
+            "La forma en que haces un 'click' perfecto con mi forma de ser.",
+            "Tu paciencia infinita conmigo, aun cuando soy un dolor de cabeza.",
+            "Tu voz dulce, que es la única melodía que logra calmar mis tormentas internas.",
+            "La valentía con la que cuidas y proteges nuestro amor día a día.",
+            "Tus detalles silenciosos que demuestran que estás pensando en mí.",
+            "El orgullo inmenso que siento cuando te presento ante el mundo como mi pareja.",
+            "Nuestros viajes y cómo cualquier lugar se vuelve mágico si estoy tomado de tu mano.",
+            "La forma en la que me impulsas a seguir adelante con mis proyectos sin dudar de mí.",
+            "Tus ojitos brillantes cuando ves algo que te entusiasma o te hace feliz.",
+            "Que eres mi mejor amiga, mi amante y mi hogar, todo en una sola persona.",
+            "Simplemente porque eres tú, la loca maravillosa que elegí y elegiría en un millón de vidas."
+        ];
+
+        const starsContainer = document.getElementById('starsContainer');
+        const reasonText = document.getElementById('reasonText');
+
+        for (let i = 1; i <= 29; i++) {
+            const star = document.createElement('div');
+            star.className = 'star-point';
+            star.innerText = i;
+            star.onclick = () => {
+                document.querySelectorAll('.star-point').forEach(s => s.classList.remove('active'));
+                star.classList.add('active');
+                reasonText.style.opacity = 0;
+                setTimeout(() => {
+                    reasonText.innerHTML = `<strong>Razón #${i}:</strong> ${reasons[i-1]}`;
+                    reasonText.style.opacity = 1;
+                }, 200);
+            };
+            starsContainer.appendChild(star);
+        }
+
+        // ==========================================
+        // MOTOR DE ESTRELLAS Y PARTÍCULAS (CANVAS)
+        // ==========================================
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+
+        let stars = [];
+        let bursts = [];
+        const numStars = 100;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initStars();
+        }
+
+        function initStars() {
+            stars = [];
+            for (let i = 0; i < numStars; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.5,
+                    alpha: Math.random(),
+                    speed: 0.005 + Math.random() * 0.015
+                });
+            }
+        }
+
+        // Detonador de polvo estelar dorado en clics
+        function triggerGoldBurst(x, y) {
+            for (let i = 0; i < 20; i++) {
+                bursts.push({
+                    x: x,
+                    y: y,
+                    vx: (Math.random() - 0.5) * 8,
+                    vy: (Math.random() - 0.5) * 8,
+                    radius: 2 + Math.random() * 3,
+                    alpha: 1,
+                    decay: 0.02 + Math.random() * 0.03
+                });
+            }
+        }
+
+        window.addEventListener('click', (e) => {
+            triggerGoldBurst(e.clientX, e.clientY);
+        });
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Dibujar estrellas de fondo
+            ctx.fillStyle = "#fff";
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.globalAlpha = Math.sin(star.alpha);
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = "#d4af37";
+                ctx.fill();
+                
+                star.alpha += star.speed;
+            });
+
+            // Dibujar explosiones de clic (polvo dorado)
+            bursts.forEach((p, index) => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = "#d4af37";
+                ctx.globalAlpha = p.alpha;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = "#f3d078";
+                ctx.fill();
+
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= p.decay;
+
+                if (p.alpha <= 0) {
+                    bursts.splice(index, 1);
+                }
+            });
+
+            ctx.shadowBlur = 0;
+            requestAnimationFrame(drawStars);
+        }
+
+        const musica = document.getElementById('musica');
+
+document.body.addEventListener('click', () => {
+    musica.play();
+}, { once: true });
+    </script>
+</body>
+</html>
