@@ -669,6 +669,10 @@
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
         }
 
+        .play-btn.playing {
+            background: #f3d078;
+        }
+
         .timeline-bar {
             height: 6px;
             background: rgba(255,255,255,0.1);
@@ -677,13 +681,15 @@
             position: relative;
             overflow: hidden;
             min-width: 50px;
+            cursor: pointer;
         }
 
         .timeline-progress {
-            width: 45%;
+            width: 0%;
             height: 100%;
             background: #d4af37;
             border-radius: 3px;
+            transition: width 0.1s linear;
         }
 
         /* ==========================================================================
@@ -999,329 +1005,74 @@
 
             .wish-jar {
                 width: 100%;
-                max-width: 220px;
-                height: 300px;
-                padding: 25px 15px;
-            }
-
-            .wish-jar i {
-                font-size: 38px;
-                margin-top: 20px;
-                margin-bottom: 15px;
-            }
-
-            .wish-jar h3 {
-                font-size: 15px;
-                margin-bottom: 10px;
-            }
-
-            .wish-jar p {
-                font-size: 12px;
-            }
-
-            .envelope {
-                width: 100%;
-                height: 280px;
-            }
-
-            .envelope-front {
-                padding: 25px;
-            }
-
-            .envelope-front i {
-                font-size: 40px;
-                margin-bottom: 12px;
-            }
-
-            .envelope-front h3 {
-                font-size: 16px !important;
-            }
-
-            .letter-content {
-                padding: 20px;
-                top: 10px;
-                left: 10px;
-                right: 10px;
-                bottom: 10px;
-            }
-
-            .letter-text-long {
-                font-size: 13px;
-                line-height: 1.6;
-            }
-
-            .letter-text-long h3 {
-                font-size: 18px;
-                margin-bottom: 15px;
-            }
-
-            .envelope.open .letter-content {
-                height: 380px;
-                transform: translateZ(60px) translateY(-50px);
+                max-width: 200px;
+                height: auto;
+                padding: 25px 15px 35px;
             }
 
             .dictionary-box {
-                grid-template-columns: 1fr;
-                height: auto;
-                max-height: 400px;
-            }
-
-            .dictionary-tabs {
-                border-right: none;
-                border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-                flex-direction: row;
-                overflow-x: auto;
-                overflow-y: hidden;
+                grid-template-columns: 120px 1fr;
+                height: 280px;
             }
 
             .dict-tab {
-                flex-shrink: 0;
-                border-bottom: none;
-                border-right: 1px solid rgba(212, 175, 55, 0.05);
-                padding: 12px 15px;
-                font-size: 12px;
-            }
-
-            .dictionary-view {
-                padding: 20px;
-                font-size: 14px;
-            }
-
-            .dictionary-view h3 {
-                font-size: 22px;
-                margin-bottom: 10px;
-            }
-
-            .dictionary-view .pronunciation {
-                font-size: 12px;
-                margin-bottom: 15px;
-            }
-
-            .dictionary-view .definition {
-                font-size: 14px;
-                line-height: 1.6;
-            }
-
-            .constellation-grid {
-                grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
-                gap: 10px;
-                max-width: 100%;
-                padding: 12px;
-            }
-
-            .star-point {
-                width: 40px;
-                height: 40px;
-                font-size: 12px;
-            }
-
-            .reason-display-panel {
-                min-height: 90px;
-                padding: 15px;
-                margin-top: 15px;
-                font-size: 13px;
+                font-size: 11px;
+                padding: 10px 12px;
             }
 
             .playlist-card {
                 flex-direction: column;
-                gap: 15px;
-                padding: 15px;
-            }
-
-            .playlist-cover {
-                width: 120px;
-                height: 120px;
-                font-size: 50px;
-            }
-
-            .track-info h3 {
-                font-size: 16px;
-            }
-
-            .track-info p {
-                font-size: 13px;
-                margin-bottom: 15px;
-            }
-
-            .audio-controls {
-                gap: 15px;
-                width: 100%;
-                justify-content: center;
-            }
-
-            .play-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-            }
-
-            .timeline-bar {
-                height: 5px;
-            }
-
-            .controls-layer {
-                bottom: 15px;
-                left: 15px;
-                right: 15px;
-                gap: 10px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .nav-btn {
-                padding: 10px 20px;
-                font-size: 12px;
-                letter-spacing: 1px;
-            }
-
-            .slide-counter {
-                font-size: 12px;
-                width: 100%;
-                text-align: center;
-                order: 3;
-            }
-
-            .love-quote {
-                font-size: 18px;
-                padding: 25px;
-                line-height: 1.4;
-            }
-
-            .love-quote::before, .love-quote::after {
-                font-size: 50px;
-            }
-            .love-quote::before { top: -15px; left: 5px; }
-            .love-quote::after { bottom: -45px; right: 5px; }
-        }
-
-        @media (max-width: 480px) {
-            .presentation-wrapper {
-                width: 100%;
-                height: 100vh;
-            }
-
-            .slide {
-                padding: 15px;
-                padding-bottom: 130px;
-            }
-
-            .slide-header {
-                margin-bottom: 12px;
-            }
-
-            .slide-header h2 {
-                font-size: 20px;
-                letter-spacing: 1px;
-            }
-
-            .slide-header p {
-                font-size: 10px;
-            }
-
-            h1 {
-                font-size: 28px !important;
-            }
-
-            .envelope {
-                height: 250px;
-            }
-
-            .envelope-front i {
-                font-size: 35px;
-            }
-
-            .polaroid-card {
-                max-width: 100%;
-                width: 100%;
-                height: 280px;
-            }
-
-            .wish-jar {
-                max-width: 100%;
-                width: 100%;
-                height: 280px;
-            }
-
-            .constellation-grid {
-                grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
-                gap: 8px;
-            }
-
-            .star-point {
-                width: 35px;
-                height: 35px;
-                font-size: 11px;
-            }
-
-            .nav-btn {
-                padding: 8px 16px;
-                font-size: 11px;
-            }
-
-            .controls-layer {
-                bottom: 12px;
-                left: 10px;
-                right: 10px;
-            }
-
-            .slide-counter {
-                font-size: 11px;
-            }
-
-            .playlist-cover {
-                width: 100px;
-                height: 100px;
-                font-size: 40px;
             }
         }
     </style>
 </head>
 <body>
     <canvas id="starfield"></canvas>
+    
+    <!-- Audio Element - Invisible but plays music -->
+    <audio id="backgroundMusic" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="star-progress-bar"></div>
 
     <div class="presentation-wrapper">
-        <div class="star-progress-bar"></div>
-
-        <!-- SLIDE 1: Portada Principal -->
+        <!-- Slide 1: Portada / Presentación -->
         <div class="slide active">
             <div class="slide-body">
-                <h1 style="font-family: 'Cinzel', serif; font-size: 56px; text-align: center; color: #d4af37; letter-spacing: 3px; text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); margin-bottom: 20px;">
-                    ¡FELIZ CUMPLEAÑOS!
-                </h1>
-                <p style="font-family: 'Cinzel', serif; text-align: center; font-size: 24px; color: #fff; letter-spacing: 2px; margin-bottom: 30px;">
-                    Mi Amor, Mi Loca, Mi Todo
-                </p>
-                <p style="text-align: center; font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.8; max-width: 600px; margin: 0 auto;">
-                    Bienvenida a tu universo completo, donde cada rincón está diseñado para ti. Hoy celebramos tu existencia, tu risa, tu locura hermosa y todo lo que eres.
-                </p>
-                <p style="text-align: center; margin-top: 40px; color: #d4af37; font-size: 14px; letter-spacing: 2px;">✨ Haz clic en SIGUIENTE para comenzar ✨</p>
+                <div style="text-align: center;">
+                    <h1 style="font-family: 'Cinzel', serif; font-size: 56px; color: #d4af37; margin-bottom: 20px; letter-spacing: 4px;">
+                        ✦ FELIZ CUMPLEAÑOS ✦
+                    </h1>
+                    <p style="font-size: 24px; color: #fff; margin-bottom: 10px;">Mi amor</p>
+                    <p style="font-size: 16px; color: rgba(255,255,255,0.7);">Tu universo completo en esta noche mágica</p>
+                </div>
             </div>
         </div>
 
-        <!-- SLIDE 2: La Carta -->
+        <!-- Slide 2: La Carta / Sobre -->
         <div class="slide">
             <div class="slide-header">
-                <h2>Nuestra Historia</h2>
-                <p>Un sobre especial para ti</p>
+                <h2>La Carta</h2>
+                <p>Abre y descubre mis palabras</p>
             </div>
             <div class="slide-body">
                 <div class="envelope-container">
-                    <div class="envelope">
+                    <div class="envelope" id="envelope">
                         <div class="envelope-front">
                             <i class="fas fa-envelope"></i>
-                            <h3 style="font-family: 'Cinzel', serif; font-size: 18px; color: #d4af37; letter-spacing: 1px;">Abre tu carta</h3>
-                            <p style="font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 10px;">Haz clic para leer mi mensaje</p>
+                            <p style="font-family: 'Cinzel', serif; color: #d4af37; font-size: 18px;">TAP PARA ABRIR</p>
                         </div>
                         <div class="letter-content">
                             <div class="letter-text-long">
-                                <h3>Mi Amor</h3>
-                                <p>No hay palabras suficientes para expresar lo que significas para mí. Cada día contigo es una aventura, cada risa tuya es mi canción favorita, cada momento es un tesoro que guardo en mi corazón.</p>
+                                <h3>Mi amor infinito,</h3>
+                                <p>Cada día que compartimos contigo es un regalo que atesoro profundamente. Tu sonrisa ilumina mis días más oscuros, tu risa es la música más dulce de mis oídos, y tu presencia llena mi corazón de una paz que nunca conocí.</p>
                                 <div class="letter-section-break"></div>
-                                <p>Eres mi razón de sonreír sin motivo, mi hogar en medio de la tormenta, mi sueño hecho realidad. Tu locura hermosa, tu energía contagiosa, tu corazón puro... todo en ti me enamora cada día más.</p>
+                                <p>Eres mi razón, mi fuerza, mi inspiración. En tus ojos veo el futuro que siempre he soñado. Contigo, cada momento es infinito, cada beso eterno, cada caricia un recordatorio de cuán real es este amor.</p>
                                 <div class="letter-section-break"></div>
-                                <p>Gracias por ser tú, por elegirme, por crear estos recuerdos tan bellos juntos. Hoy no solo celebramos tu cumpleaños, celebramos todo lo que representas en mi vida.</p>
+                                <p>Prometo amarte con cada latido de mi corazón, proteger tu felicidad como mi más preciado tesoro, y construir con tus manos un mundo donde solo exista nuestro amor.</p>
                                 <div class="letter-section-break"></div>
-                                <p style="text-align: center; margin-top: 25px; font-family: 'Cinzel', serif; color: #d4af37; font-size: 16px;">Te amo infinito ∞</p>
+                                <p style="text-align: right;">Eternamente tuyo,<br>Tu amor</p>
                             </div>
                         </div>
                     </div>
@@ -1329,159 +1080,41 @@
             </div>
         </div>
 
-        <!-- SLIDE 3: Memorias (Polaroids) -->
+        <!-- Slide 3: Nuestras Memorias (PHOTOS) -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Nuestras Memorias</h2>
-                <p>Momentos que quedarán para siempre</p>
+                <p>Momentos que guardaré para siempre</p>
             </div>
             <div class="slide-body">
                 <div class="polaroid-deck">
-                    <div class="polaroid-card" style="--rotation: -8deg;">
-                        <div class="polaroid-photo" style="background: linear-gradient(135deg, #ff6b9d, #c06c84);"></div>
-                        <div class="polaroid-caption">Tu Sonrisa</div>
+                    <div class="polaroid-card" style="--rotation: -3deg;">
+                        <div class="polaroid-photo">
+                            <img src="foto1.jpg" alt="Momento especial 1">
+                        </div>
+                        <div class="polaroid-caption">Nuestro amor</div>
                     </div>
-                    <div class="polaroid-card" style="--rotation: 5deg;">
-                        <div class="polaroid-photo" style="background: linear-gradient(135deg, #6bcf7f, #4a90e2);"></div>
-                        <div class="polaroid-caption">Nuestros Días</div>
+                    <div class="polaroid-card" style="--rotation: 2deg;">
+                        <div class="polaroid-photo">
+                            <img src="foto2.jpg" alt="Momento especial 2">
+                        </div>
+                        <div class="polaroid-caption">En cada instante</div>
                     </div>
-                    <div class="polaroid-card" style="--rotation: -12deg;">
-                        <div class="polaroid-photo" style="background: linear-gradient(135deg, #ffd89b, #19547b);"></div>
-                        <div class="polaroid-caption">Nuestro Amor</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 4: Tarros de Deseos -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2>Tarros del Mañana</h2>
-                <p>Deseos y sueños para nuestro futuro</p>
-            </div>
-            <div class="slide-body">
-                <div class="jar-container">
-                    <div class="wish-jar">
-                        <i class="fas fa-star"></i>
-                        <h3>Sueños</h3>
-                        <p class="tap-hint">Toca para descubrir</p>
-                        <p>Viajar juntos, crear recuerdos en cada rincón del mundo</p>
-                    </div>
-                    <div class="wish-jar">
-                        <i class="fas fa-heart"></i>
-                        <h3>Promesas</h3>
-                        <p class="tap-hint">Toca para descubrir</p>
-                        <p>Amarte cada día más, estar en las buenas y en las malas</p>
-                    </div>
-                    <div class="wish-jar">
-                        <i class="fas fa-ring"></i>
-                        <h3>Eternidad</h3>
-                        <p class="tap-hint">Toca para descubrir</p>
-                        <p>Contigo siempre, construyendo nuestro futuro juntos</p>
+                    <div class="polaroid-card" style="--rotation: -1deg;">
+                        <div class="polaroid-photo">
+                            <img src="foto3.jpg" alt="Momento especial 3">
+                        </div>
+                        <div class="polaroid-caption">Para la eternidad</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 5: Diccionario de Nuestra Locura -->
+        <!-- Slide 4: Música - Nuestra Canción -->
         <div class="slide">
             <div class="slide-header">
-                <h2>Nuestro Diccionario</h2>
-                <p>Palabras que solo nosotros entendemos</p>
-            </div>
-            <div class="slide-body">
-                <div class="dictionary-box">
-                    <div class="dictionary-tabs">
-                        <div class="dict-tab active" data-word="0">Nosotros</div>
-                        <div class="dict-tab" data-word="1">Locura</div>
-                        <div class="dict-tab" data-word="2">Amor</div>
-                        <div class="dict-tab" data-word="3">Eternidad</div>
-                    </div>
-                    <div class="dictionary-view">
-                        <h3>Nosotros</h3>
-                        <p class="pronunciation">/no-so-tros/</p>
-                        <p class="definition">Dos personas que decidieron ser una. Sinónimo de felicidad infinita, comprensión mutua y amor verdadero. Ver: Universo perfecto.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 6: 29 Razones -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2>29 Razones</h2>
-                <p>Una por cada año de tu hermosa existencia</p>
-            </div>
-            <div class="slide-body">
-                <div class="constellation-grid">
-                    <div class="star-point">1</div>
-                    <div class="star-point">2</div>
-                    <div class="star-point">3</div>
-                    <div class="star-point">4</div>
-                    <div class="star-point">5</div>
-                    <div class="star-point">6</div>
-                    <div class="star-point">7</div>
-                    <div class="star-point">8</div>
-                    <div class="star-point">9</div>
-                    <div class="star-point">10</div>
-                    <div class="star-point">11</div>
-                    <div class="star-point">12</div>
-                    <div class="star-point">13</div>
-                    <div class="star-point">14</div>
-                    <div class="star-point">15</div>
-                    <div class="star-point">16</div>
-                    <div class="star-point">17</div>
-                    <div class="star-point">18</div>
-                    <div class="star-point">19</div>
-                    <div class="star-point">20</div>
-                    <div class="star-point">21</div>
-                    <div class="star-point">22</div>
-                    <div class="star-point">23</div>
-                    <div class="star-point">24</div>
-                    <div class="star-point">25</div>
-                    <div class="star-point">26</div>
-                    <div class="star-point">27</div>
-                    <div class="star-point">28</div>
-                    <div class="star-point">29</div>
-                </div>
-                <div class="reason-display-panel">
-                    <div id="reason-text" style="font-family: 'Cinzel', serif; font-size: 16px; color: #d4af37; letter-spacing: 1px;">Haz clic en una estrella para descubrir por qué te amo</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 7: Alquimia del Amor -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2>La Alquimia del Amor</h2>
-                <p>Ingredientes de nuestra magia</p>
-            </div>
-            <div class="slide-body">
-                <div class="card-row">
-                    <div class="gold-card">
-                        <i class="fas fa-heart icon-decor"></i>
-                        <h3>Pasión</h3>
-                        <p>Cada beso, cada abrazo, cada caricia es prueba de cuánto te deseo y te amo.</p>
-                    </div>
-                    <div class="gold-card">
-                        <i class="fas fa-laugh-squint icon-decor"></i>
-                        <h3>Diversión</h3>
-                        <p>Tu risa es mi droga favorita, tu locura es mi inspiración diaria.</p>
-                    </div>
-                    <div class="gold-card">
-                        <i class="fas fa-infinity icon-decor"></i>
-                        <h3>Eternidad</h3>
-                        <p>Quiero envejecer contigo, ver crecer nuestros sueños juntos.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 8: Música -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2>Nuestra Canción</h2>
-                <p>La música que suena cuando estoy contigo</p>
+                <h2>Nuestra Música</h2>
+                <p>La banda sonora de nuestro amor</p>
             </div>
             <div class="slide-body">
                 <div class="playlist-card">
@@ -1489,274 +1122,400 @@
                         <i class="fas fa-music"></i>
                     </div>
                     <div class="track-info">
-                        <h3>Canción Especial Para Ti</h3>
-                        <p>Un mensaje en melodía</p>
+                        <h3>Nuestro Himno de Amor</h3>
+                        <p>Dedicada a ti en este día especial</p>
                     </div>
                     <div class="audio-controls">
-                        <button class="play-btn" id="music-play">
+                        <button class="play-btn" id="playBtn" title="Reproducir música">
                             <i class="fas fa-play"></i>
                         </button>
-                        <div class="timeline-bar">
-                            <div class="timeline-progress"></div>
+                        <div class="timeline-bar" id="timelineBar">
+                            <div class="timeline-progress" id="timelineProgress"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 9: Cierre -->
+        <!-- Slide 5: 29 Razones -->
         <div class="slide">
+            <div class="slide-header">
+                <h2>29 Razones</h2>
+                <p>Por las que te amo cada día</p>
+            </div>
             <div class="slide-body">
-                <div class="love-quote">
-                    Te amo mi amor, mi loca, mi todo.<br>
-                    Que este día sea tan especial como lo eres tú.<br>
-                    ✨ Feliz Cumpleaños ✨
+                <div class="constellation-grid" id="reasonsGrid"></div>
+                <div class="reason-display-panel" id="reasonDisplay">
+                    Haz clic en una estrella para descubrir una razón
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Deseos -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Deseos del Mañana</h2>
+                <p>Nuestras ilusiones sin fin</p>
+            </div>
+            <div class="slide-body">
+                <div class="jar-container" id="wishesContainer"></div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Diccionario -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Diccionario de Nuestra Locura</h2>
+                <p>Palabras que solo nosotros entendemos</p>
+            </div>
+            <div class="slide-body">
+                <div class="dictionary-box">
+                    <div class="dictionary-tabs" id="dictTabs"></div>
+                    <div class="dictionary-view" id="dictView"></div>
                 </div>
             </div>
         </div>
 
         <!-- Controles de Navegación -->
         <div class="controls-layer">
-            <button class="nav-btn" id="prev-btn" disabled>
+            <button class="nav-btn" id="prevBtn">
                 <i class="fas fa-chevron-left"></i> ANTERIOR
             </button>
             <span class="slide-counter">
-                <span id="current-slide">1</span> / <span id="total-slides">9</span>
+                <span id="currentSlide">1</span> / <span id="totalSlides">7</span>
             </span>
-            <button class="nav-btn" id="next-btn">
+            <button class="nav-btn" id="nextBtn">
                 SIGUIENTE <i class="fas fa-chevron-right"></i>
             </button>
         </div>
 
         <!-- Modal de Celebración -->
-        <div class="modal-overlay" id="modal">
+        <div class="modal-overlay" id="modalOverlay">
             <div class="celebration-modal">
-                <h3>¡Llegaste al final!</h3>
-                <p>Pero esto es solo el comienzo de nuestro viaje juntos.</p>
-                <p>Gracias por cada momento que me das el honor de vivir contigo.</p>
-                <button class="close-modal-btn" onclick="location.reload()">Volver al Inicio</button>
+                <h3>🎉 ¡ESPERA! 🎉</h3>
+                <p>Este mundo está lleno de magia, pero la magia más grande eres tú.</p>
+                <p>Que en este día especial, todas tus ilusiones se hagan realidad, y que cada momento junto a ti sea un recordatorio del regalo que significa amarte.</p>
+                <button class="close-modal-btn" onclick="closeModal()">Continuar</button>
             </div>
         </div>
     </div>
 
     <script>
-        // ===== CONFIGURACIÓN GLOBAL =====
+        // ========================================
+        // DATOS Y CONFIGURACIÓN
+        // ========================================
+
+        const reasons = [
+            "Tu sonrisa me despierta cada mañana",
+            "En tus ojos veo el futuro",
+            "Tu risa es mi música favorita",
+            "Haces que quiera ser mejor",
+            "Tu amor me sana el alma",
+            "Me das paz en la tormenta",
+            "Eres mi hogar siempre",
+            "Tu fuerza me inspira",
+            "Me entiendes sin hablar",
+            "Haces que todo tenga sentido",
+            "Eres mi persona favorita",
+            "Tu amor es mi medicina",
+            "Me haces sentir especial",
+            "Cada día me enamoro más",
+            "Eres mi razón de sonreír",
+            "Juntos somos invencibles",
+            "Tu corazón es perfecto",
+            "Me das seguridad absoluta",
+            "Eres mi sueño realidad",
+            "Tu presencia es suficiente",
+            "Me entiendes completamente",
+            "Eres mi verdadera felicidad",
+            "Cada beso tuyo es magia",
+            "Me completas perfectamente",
+            "Eres mi infinito",
+            "Tu amor es mi fortaleza",
+            "Contigo soy completo",
+            "Eres mi eternidad",
+            "Te amaria mil vidas más"
+        ];
+
+        const wishes = [
+            { icon: "fa-home", title: "Nuestro Hogar", text: "Un lugar lleno de amor y risas" },
+            { icon: "fa-ring", title: "Para Siempre", text: "Que nuestro amor sea eterno" },
+            { icon: "fa-family", title: "Una Familia", text: "Llena de luz y amor infinito" }
+        ];
+
+        const dictionary = [
+            { word: "Amor", definition: "Lo que siento cada segundo contigo, sin medida y sin fin." },
+            { word: "Eternidad", definition: "El tiempo que deseo pasar contigo, sin importar los años." },
+            { word: "Sueño", definition: "Lo que eres para mí, una realidad imposible de creer." },
+            { word: "Magia", definition: "Lo que sucede cuando tus manos tocan las mías." },
+            { word: "Completitud", definition: "El estado en que estoy cuando estoy contigo." },
+            { word: "Infinito", definition: "El símbolo perfecto para describir nuestro amor." },
+            { word: "Promesa", definition: "Mi compromiso eterno de amarte siempre." },
+            { word: "Hogar", definition: "Donde sea que estés tú." }
+        ];
+
+        // ========================================
+        // INICIALIZACIÓN DE LA PÁGINA
+        // ========================================
+
+        let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
-        let currentSlide = 0;
 
-        // Actualizar contador
-        document.getElementById('total-slides').textContent = totalSlides;
+        document.getElementById('totalSlides').textContent = totalSlides;
 
-        // ===== FUNCIONES DE NAVEGACIÓN =====
-        function updateSlide() {
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active');
+        // Inicializar elementos
+        initReasons();
+        initWishes();
+        initDictionary();
+        initEnvelope();
+        initAudio();
+        setupNavigation();
+        initStarfield();
+
+        // Mostrar modal inicial
+        setTimeout(() => {
+            document.getElementById('modalOverlay').classList.add('active');
+        }, 1000);
+
+        // ========================================
+        // FUNCIONES DE AUDIO
+        // ========================================
+
+        function initAudio() {
+            const audio = document.getElementById('backgroundMusic');
+            const playBtn = document.getElementById('playBtn');
+            const timelineBar = document.getElementById('timelineBar');
+            const timelineProgress = document.getElementById('timelineProgress');
+
+            // Auto-play música cuando la página carga
+            audio.volume = 0.3;
+            setTimeout(() => {
+                audio.play().catch(e => console.log("Autoplay prevented:", e));
+                updatePlayButton();
+            }, 2000);
+
+            playBtn.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+                updatePlayButton();
             });
-            slides[currentSlide].classList.add('active');
-            updateProgress();
-            updateButtons();
+
+            audio.addEventListener('timeupdate', () => {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                timelineProgress.style.width = percent + '%';
+            });
+
+            timelineBar.addEventListener('click', (e) => {
+                const rect = timelineBar.getBoundingClientRect();
+                const percent = (e.clientX - rect.left) / rect.width;
+                audio.currentTime = percent * audio.duration;
+            });
+
+            function updatePlayButton() {
+                if (audio.paused) {
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    playBtn.classList.remove('playing');
+                } else {
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    playBtn.classList.add('playing');
+                }
+            }
+        }
+
+        // ========================================
+        // FUNCIONES DE SOBRE/CARTA
+        // ========================================
+
+        function initEnvelope() {
+            const envelope = document.getElementById('envelope');
+            envelope.addEventListener('click', () => {
+                envelope.classList.toggle('open');
+            });
+        }
+
+        // ========================================
+        // FUNCIONES DE RAZONES
+        // ========================================
+
+        function initReasons() {
+            const grid = document.getElementById('reasonsGrid');
+            reasons.forEach((reason, i) => {
+                const star = document.createElement('div');
+                star.className = 'star-point';
+                star.textContent = i + 1;
+                star.addEventListener('click', () => {
+                    document.querySelectorAll('.star-point').forEach(s => s.classList.remove('active'));
+                    star.classList.add('active');
+                    document.getElementById('reasonDisplay').textContent = reason;
+                });
+                grid.appendChild(star);
+            });
+        }
+
+        // ========================================
+        // FUNCIONES DE DESEOS
+        // ========================================
+
+        function initWishes() {
+            const container = document.getElementById('wishesContainer');
+            wishes.forEach(wish => {
+                const jar = document.createElement('div');
+                jar.className = 'wish-jar';
+                jar.innerHTML = `
+                    <i class="fas ${wish.icon}"></i>
+                    <h3>${wish.title}</h3>
+                    <span class="tap-hint">TAP PARA VER</span>
+                    <p>${wish.text}</p>
+                `;
+                jar.addEventListener('click', () => {
+                    jar.classList.toggle('unlocked');
+                });
+                container.appendChild(jar);
+            });
+        }
+
+        // ========================================
+        // FUNCIONES DE DICCIONARIO
+        // ========================================
+
+        function initDictionary() {
+            const tabs = document.getElementById('dictTabs');
+            const view = document.getElementById('dictView');
+
+            dictionary.forEach((entry, i) => {
+                const tab = document.createElement('div');
+                tab.className = 'dict-tab' + (i === 0 ? ' active' : '');
+                tab.textContent = entry.word;
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.dict-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    showDictEntry(entry);
+                });
+                tabs.appendChild(tab);
+            });
+
+            showDictEntry(dictionary[0]);
+        }
+
+        function showDictEntry(entry) {
+            const view = document.getElementById('dictView');
+            view.innerHTML = `
+                <h3>${entry.word}</h3>
+                <p class="pronunciation">/pro·nun·cia·ción/</p>
+                <p class="definition">${entry.definition}</p>
+            `;
+        }
+
+        // ========================================
+        // FUNCIONES DE NAVEGACIÓN
+        // ========================================
+
+        function setupNavigation() {
+            document.getElementById('prevBtn').addEventListener('click', previousSlide);
+            document.getElementById('nextBtn').addEventListener('click', nextSlide);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') previousSlide();
+                if (e.key === 'ArrowRight') nextSlide();
+            });
+            updateSlideButtons();
+        }
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+            document.getElementById('currentSlide').textContent = n + 1;
+            updateProgressBar();
+            updateSlideButtons();
         }
 
         function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateSlide();
-            } else {
-                document.getElementById('modal').classList.add('active');
-            }
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
         }
 
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlide();
-            }
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
         }
 
-        function updateProgress() {
-            const progress = ((currentSlide + 1) / totalSlides) * 100;
-            document.querySelector('.star-progress-bar').style.width = progress + '%';
-            document.getElementById('current-slide').textContent = currentSlide + 1;
+        function updateSlideButtons() {
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
         }
 
-        function updateButtons() {
-            document.getElementById('prev-btn').disabled = currentSlide === 0;
-            document.getElementById('next-btn').disabled = false;
+        function updateProgressBar() {
+            const percent = ((currentSlide + 1) / totalSlides) * 100;
+            document.querySelector('.star-progress-bar').style.width = percent + '%';
         }
 
-        // Event Listeners para botones
-        document.getElementById('next-btn').addEventListener('click', nextSlide);
-        document.getElementById('prev-btn').addEventListener('click', prevSlide);
+        // ========================================
+        // FUNCIONES DE MODAL
+        // ========================================
 
-        // Teclado
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') nextSlide();
-            if (e.key === 'ArrowLeft') prevSlide();
-        });
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
 
-        // ===== FUNCIONALIDADES ESPECIALES =====
+        // ========================================
+        // STARFIELD CANVAS
+        // ========================================
 
-        // 1. SOBRE (Envelope)
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.envelope')) {
-                e.target.closest('.envelope').classList.toggle('open');
-            }
-        });
+        function initStarfield() {
+            const canvas = document.getElementById('starfield');
+            const ctx = canvas.getContext('2d');
 
-        // 2. TARROS (Wish Jars)
-        document.querySelectorAll('.wish-jar').forEach(jar => {
-            jar.addEventListener('click', function() {
-                this.classList.toggle('unlocked');
-            });
-        });
-
-        // 3. DICCIONARIO
-        const dictDefinitions = [
-            {
-                word: 'Nosotros',
-                pronunciation: '/no-so-tros/',
-                definition: 'Dos personas que decidieron ser una. Sinónimo de felicidad infinita, comprensión mutua y amor verdadero. Ver: Universo perfecto.'
-            },
-            {
-                word: 'Locura',
-                pronunciation: '/lo-cu-ra/',
-                definition: 'Tu risa espontánea, tu manera de verme, ese caos hermoso que traes a mi vida. Mi razón favorita de existir.'
-            },
-            {
-                word: 'Amor',
-                pronunciation: '/a-mor/',
-                definition: 'Lo que siento cuando te veo, cuando te escucho, cuando te toco. Infinito, eterno, indescriptible.'
-            },
-            {
-                word: 'Eternidad',
-                pronunciation: '/e-ter-ni-dad/',
-                definition: 'El tiempo que quiero estar contigo. Cada segundo a tu lado es una eternidad de felicidad.'
-            }
-        ];
-
-        document.querySelectorAll('.dict-tab').forEach((tab, index) => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.dict-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                
-                const definition = dictDefinitions[index];
-                const view = this.parentElement.nextElementSibling;
-                view.innerHTML = `
-                    <h3>${definition.word}</h3>
-                    <p class="pronunciation">${definition.pronunciation}</p>
-                    <p class="definition">${definition.definition}</p>
-                `;
-            });
-        });
-
-        // 4. CONSTELACIÓN DE 29 RAZONES
-        const reasons = [
-            'Tu sonrisa ilumina mi día',
-            'Tu risa es mi canción favorita',
-            'Me haces mejor persona',
-            'Eres mi paz en la tormenta',
-            'Tu abrazo es mi hogar',
-            'Me haces sentir vivo',
-            'Tu locura es mi inspiración',
-            'Creo en ti más que en nadie',
-            'Tu amor me sana',
-            'Me haces soñar diferente',
-            'Eres mi hogar',
-            'Tu bondad me inspira',
-            'Iluminas mi mundo',
-            'Eres mi razón de sonreír',
-            'Tu presencia calma mi alma',
-            'Eres única y especial',
-            'Me completas',
-            'Tu compañía es mi tesoro',
-            'Eres mi aventura favorita',
-            'Me amas tal como soy',
-            'Tu corazón es puro',
-            'Eres mi sueño hecho realidad',
-            'Me haces sentir amado',
-            'Tu energía me contagia',
-            'Eres mi persona favorita',
-            'Tu amor es mi fortaleza',
-            'Quiero envejecer contigo',
-            'Eres mi eternidad',
-            'Te amo más que a mi propia vida'
-        ];
-
-        document.querySelectorAll('.star-point').forEach((star, index) => {
-            star.addEventListener('click', function() {
-                document.querySelectorAll('.star-point').forEach(s => s.classList.remove('active'));
-                this.classList.add('active');
-                document.getElementById('reason-text').textContent = reasons[index];
-            });
-        });
-
-        // 5. MÚSICA
-        let isPlaying = false;
-        const musicBtn = document.getElementById('music-play');
-
-        // Crear elemento de audio
-        const audio = new Audio();
-        // Reemplaza con la URL de tu música
-        audio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
-        audio.loop = true;
-
-        musicBtn.addEventListener('click', function() {
-            if (isPlaying) {
-                audio.pause();
-                musicBtn.innerHTML = '<i class="fas fa-play"></i>';
-                isPlaying = false;
-            } else {
-                audio.play().catch(err => {
-                    console.log('Error al reproducir música:', err);
-                    alert('No se pudo reproducir la música. Verifica la URL.');
-                });
-                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                isPlaying = true;
-            }
-        });
-
-        // ===== STARFIELD (Fondo interactivo) =====
-        const canvas = document.getElementById('starfield');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
 
-        const stars = [];
-        for (let i = 0; i < 100; i++) {
-            stars.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 1.5,
-                opacity: Math.random() * 0.5 + 0.5,
-                twinkle: Math.random() * 0.02
-            });
-        }
-
-        function drawStars() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            stars.forEach(star => {
-                ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                ctx.fill();
-                
-                star.opacity += star.twinkle;
-                if (star.opacity <= 0.3 || star.opacity >= 1) {
-                    star.twinkle *= -1;
+            class Star {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.radius = Math.random() * 1.5;
+                    this.opacity = Math.random() * 0.5 + 0.5;
+                    this.twinkleSpeed = Math.random() * 0.02 + 0.01;
                 }
-            });
-            requestAnimationFrame(drawStars);
-        }
-        drawStars();
 
-        // Inicializar
-        updateSlide();
+                draw() {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                twinkle() {
+                    this.opacity += this.twinkleSpeed;
+                    if (this.opacity >= 1 || this.opacity <= 0.2) {
+                        this.twinkleSpeed *= -1;
+                    }
+                }
+            }
+
+            const stars = [];
+            for (let i = 0; i < 100; i++) {
+                stars.push(new Star());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                stars.forEach(star => {
+                    star.twinkle();
+                    star.draw();
+                });
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
     </script>
 </body>
 </html>
